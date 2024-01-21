@@ -1,6 +1,7 @@
 <?php 
-    include "../controllers/user.php";
+    include "../controllers/userLogin.php";
 ?>
+
 
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
             <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Ingresa a tu cuenta</h2>
         </div>
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" action="#" method="POST">
+            <form class="space-y-6" action="" method="POST">
                 <div>
                     <label for="user" class="block text-sm font-medium leading-6 text-gray-900">Usuario</label>
                     <div class="mt-2">
@@ -32,7 +33,7 @@
                         <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Contraseña</label>
 
                         <div class="text-sm">
-                            <a href="reset_password.php" class="font-semibold text-indigo-600 hover:text-indigo-500">¿Olvidaste tu contraseña?</a>
+                            <a href="resetPassword.php" class="font-semibold text-indigo-600 hover:text-indigo-500">¿Olvidaste tu contraseña?</a>
                         </div>
                     </div>
                     <div class="mt-2 relative">

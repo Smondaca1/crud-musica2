@@ -1,13 +1,14 @@
 <?php 
-    session_start();
-    require "../database/db.php";
+session_start();
+require "../database/db.php";
 
-    $sqlSongs = "SELECT m.id, m.title, m.author, m.url, m.created_at, m.image_file, g.genre AS genero FROM cancion AS m 
-    INNER JOIN genero AS g
-    ON m.id_genre=g.id";
-    $songs = $conn->query($sqlSongs);
+$sqlSongs = "SELECT m.id, m.title, m.author, m.url, m.created_at, m.image_file, g.genre AS genero FROM cancion AS m INNER JOIN genero AS g ON m.id_genre=g.id";
+$songs = $conn->query($sqlSongs);
+$dir = "../assets/images/";
 
-    $dir = "../assets/images/";
+if(empty($_SESSION["user"])) {
+    header("Location: ../pages/login.php");
+}
 
 ?>
 

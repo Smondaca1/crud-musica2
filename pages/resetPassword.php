@@ -1,6 +1,9 @@
 <?php 
-    include "../controller/change_password.php";
+
+include "../controllers/changePassword.php";
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +23,7 @@
             <a href="login.php" class="block text-center text-2xl font-bold leading-9 tracking-tight text-indigo-600 underline underline-offset-8 hover:text-indigo-500 italic">Inicia sesión</a>
         </div>
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" action="#" method="POST">
+            <form class="space-y-6" action="" method="POST">
                 <div>
                     <label for="user" class="block text-sm font-medium leading-6 text-gray-900">Usuario</label>
                     <div class="mt-2">
