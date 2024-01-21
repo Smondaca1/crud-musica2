@@ -1,7 +1,7 @@
 <?php
 session_start();
 require "../database/db.php";
-include "../functions/errorMessageLogin.php";
+include "../functions/alerts/message.php";
 
 if (!empty($_POST["submitBtn"])) {
 
@@ -17,12 +17,12 @@ if (!empty($_POST["submitBtn"])) {
         $result = $stmt->get_result();
         $stmt->close();
 
-        if ($datos = $result->fetch_object()) {
+        if ($data = $result->fetch_object()) {
 
-            if ($datos->password == $password) {
-                $_SESSION["id"] = $datos->id;
-                $_SESSION["user"] = $datos->user;
-                $_SESSION["password"] = $datos->password;
+            if ($data->password == $password) {
+                $_SESSION["id"] = $data->id;
+                $_SESSION["user"] = $data->user;
+                $_SESSION["password"] = $data->password;
 
                 header("Location: ../pages/index.php");
                 exit();

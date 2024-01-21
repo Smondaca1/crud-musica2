@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include "../functions/messageChangePassword.php";
+include "../functions/alerts/message.php";
 require "../database/db.php";
 
 if (!empty($_POST["submitBtn"])) {
