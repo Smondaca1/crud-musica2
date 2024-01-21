@@ -36,12 +36,11 @@ if(empty($_SESSION["user"])) {
 <header>
     <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-            <a href="https://flowbite.com" class="flex items-center">
-                <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
-                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+            <a href="" class="flex items-center">
+                <img src="../assets/CRUD_logo.png" class="w-36" alt="Crud logo" />
             </a>
             <div class="flex items-center lg:order-2">
-                <a href="../controllers/logout.php" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Cerrar sesión</a>
+                <a href="../controllers/logout.php" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Cerrar sesión</a>
             </div>
             <div class="justify-between items-center w-full lg:flex lg:w-auto lg:order-1">
                 <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
@@ -57,33 +56,34 @@ if(empty($_SESSION["user"])) {
     </nav>
 </header>
 <div class="flex justify-center m-5">
-    <button id="defaultModalButton" data-modal-target="createModal" data-modal-toggle="createModal" class="block text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="button">
-    Agregar nueva
+    <button type="button" id="defaultModalButton" data-modal-target="createModal" data-modal-toggle="createModal" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+        Agregar nueva canción
+        <svg class="ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
     </button>
 </div>
 <div class="overflow-x-auto">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 ">
             <tr>
                 <th scope="col" class="px-4 py-4">ID</th>
                 <th scope="col" class="px-4 py-4">Título</th>
-                <th scope="col" class="px-4 py-3">Autor</th>
-                <th scope="col" class="px-4 py-3">Género</th>
-                <th scope="col" class="px-4 py-3">URL</th>
-                <th scope="col" class="px-4 py-3">Imagen</th>
-                <th scope="col" class="px-4 py-3">Acciones</th>
+                <th scope="col" class="px-4 py-4">Autor</th>
+                <th scope="col" class="px-4 py-4">Género</th>
+                <th scope="col" class="px-4 py-4">URL</th>
+                <th scope="col" class="px-4 py-4">Imagen</th>
+                <th scope="col" class="px-4 py-4">Acciones</th>
             </tr>
         </thead>
         <tbody >
             <?php while($row_song = $songs->fetch_assoc()) { ?>
-                <tr>
-                    <td><?php echo $row_song["id"]; ?></td>
-                    <td><?php echo $row_song["title"]; ?></td>
-                    <td><?php echo $row_song["author"]; ?></td>
-                    <td><?php echo $row_song["genero"]; ?></td>
-                    <td><?php echo $row_song["url"]; ?></td>
-                    <td class="w-32"><img class="w-full object-cover" src="<?php echo $dir. $row_song["id"] . '.jpg?n=' .time(); ?>" ></td>
-                    <td class="flex items-center space-x-4">
+                <tr class="border-b dark:border-gray-700">
+                    <td class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><?php echo $row_song["id"]; ?></td>
+                    <td class="px-4 py-4"><?php echo $row_song["title"]; ?></td>
+                    <td class="px-4 py-4"><?php echo $row_song["author"]; ?></td>
+                    <td class="px-4 py-4"><?php echo $row_song["genero"]; ?></td>
+                    <td class="px-4 py-4"><?php echo $row_song["url"]; ?></td>
+                    <td class="w-32 px-4 py-4"><img class="w-full object-cover" src="<?php echo $dir. $row_song["id"] . '.jpg?n=' .time(); ?>" ></td>
+                    <td class="flex items-center space-x-4 px-4 py-4">
                         <button data-bs-id="<?php echo $row_song["id"]; ?>" type="button" data-modal-target="editModal" data-modal-toggle="editModal" aria-controls="editModal" class="editBtn py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
