@@ -13,13 +13,11 @@ if (!empty($_POST["submitBtn"])) {
         $newPassword = $_POST["newPassword"];
         $confirmPassword = $_POST["confirmPassword"];
 
-        // Verificar si las contraseñas coinciden
         if ($newPassword !== $confirmPassword) {
             errorMessage("Las contraseñas no coinciden.");
             return;
         }
 
-        // Utilizar consultas preparadas para prevenir inyecciones SQL
         $stmt = $conn->prepare("SELECT * FROM usuario WHERE user = ?");
         $stmt->bind_param("s", $user);
         $stmt->execute();

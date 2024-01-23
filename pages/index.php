@@ -20,7 +20,7 @@ if(empty($_SESSION["user"])) {
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../assets/js/tailwind.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"  rel="stylesheet" />
-    <title>Document</title>
+    <title>CRUD</title>
 </head>
 <body>
     <?php if(isset($_SESSION['msg']) && isset($_SESSION['color'])) {?>
@@ -45,10 +45,10 @@ if(empty($_SESSION["user"])) {
             <div class="justify-between items-center w-full lg:flex lg:w-auto lg:order-1">
                 <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                     <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">Biblioteca</a>
+                        <a href="index.php" class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">Biblioteca</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Playlist</a>
+                        <a href="playlistHome.php" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Playlist</a>
                     </li>
                 </ul>
             </div>
@@ -84,6 +84,12 @@ if(empty($_SESSION["user"])) {
                     <td class="px-4 py-4"><?php echo $row_song["url"]; ?></td>
                     <td class="w-32 px-4 py-4"><img class="w-full object-cover" src="<?php echo $dir. $row_song["id"] . '.jpg?n=' .time(); ?>" ></td>
                     <td class="flex items-center space-x-4 px-4 py-4">
+                        <button data-bs-id="<?php echo $row_song["id"]; ?>" type="button" class="inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded bg-emerald-500 px-6 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-emerald-600 focus:bg-emerald-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300 disabled:shadow-none">
+                            <svg class="h-4 w-4 mr-2 -ml-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                <path fill-rule="evenodd" d="M19 3a2 2 0 0 1 2 2v2h-2V5.4L17.4 7h-2.8l2-2h-2.2l-2 2H9.6l2-2H9.4l-2 2H3V5c0-1.1.9-2 2-2h14ZM3 9v10c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V9H3Zm2-2.4L6.6 5H5v1.6ZM9.6 11a1 1 0 0 1 1 .1l4 3a1 1 0 0 1 0 1.6l-4 3A1 1 0 0 1 9 18v-6c0-.4.2-.7.6-.9Z" clip-rule="evenodd"/>
+                            </svg>
+                            Agregar a la Playlist
+                        </button>
                         <button data-bs-id="<?php echo $row_song["id"]; ?>" type="button" data-modal-target="editModal" data-modal-toggle="editModal" aria-controls="editModal" class="editBtn py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
@@ -163,8 +169,6 @@ if(empty($_SESSION["user"])) {
             deleteModal.querySelector("#id").value = id
         })
     })
-
-
 
 
 
