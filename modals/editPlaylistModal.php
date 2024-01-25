@@ -14,9 +14,9 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="../controllers/editPlaylist.php" method="post" enctype="multipart/form-data">
 
-                <input type="hidden" id="id" name="id" >
+                <input type="hidden" id="id" name="id">
         
                 <div class="grid gap-4 mb-4 sm:grid-cols-2">
                     <div>

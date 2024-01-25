@@ -19,7 +19,9 @@ if(empty($_SESSION["user"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../assets/js/tailwind.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"  rel="stylesheet" />
+
     <title>CRUD</title>
 </head>
 <body>
@@ -81,17 +83,17 @@ if(empty($_SESSION["user"])) {
                     <td class="px-4 py-4"><?php echo $row_song["title"]; ?></td>
                     <td class="px-4 py-4"><?php echo $row_song["author"]; ?></td>
                     <td class="px-4 py-4"><?php echo $row_song["genero"]; ?></td>
-                    <td class="px-4 py-4"><?php echo $row_song["url"]; ?></td>
+                    <td class="px-4 py-4"><a href="<?php echo $row_song["url"]; ?>" target="_blank"><?php echo $row_song["url"]; ?></a></td>
                     <td class="w-32 px-4 py-4"><img class="w-full object-cover" src="<?php echo $dir. $row_song["id"] . '.jpg?n=' .time(); ?>" ></td>
                     <td class="flex items-center space-x-4 px-4 py-4">
-                        <button data-bs-id="<?php echo $row_song["id"]; ?>" type="button" class="inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded bg-emerald-500 px-6 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-emerald-600 focus:bg-emerald-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300 disabled:shadow-none">
+                        <button data-bs-id="<?php echo $row_song["id"]; ?>" data-modal-target="selectPlaylistModal" data-modal-toggle="selectPlaylistModal" aria-controls="selectPlaylistModal" type="button" class="selectPlaylistBtn inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded bg-emerald-500 px-6 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-emerald-600 focus:bg-emerald-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300 disabled:shadow-none">
                             <svg class="h-4 w-4 mr-2 -ml-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd" d="M19 3a2 2 0 0 1 2 2v2h-2V5.4L17.4 7h-2.8l2-2h-2.2l-2 2H9.6l2-2H9.4l-2 2H3V5c0-1.1.9-2 2-2h14ZM3 9v10c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V9H3Zm2-2.4L6.6 5H5v1.6ZM9.6 11a1 1 0 0 1 1 .1l4 3a1 1 0 0 1 0 1.6l-4 3A1 1 0 0 1 9 18v-6c0-.4.2-.7.6-.9Z" clip-rule="evenodd"/>
                             </svg>
                             Agregar a la Playlist
                         </button>
                         <button data-bs-id="<?php echo $row_song["id"]; ?>" type="button" data-modal-target="editModal" data-modal-toggle="editModal" aria-controls="editModal" class="editBtn py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none h-4 w-4 mr-2 -ml-0.5" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                                 <path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" />
                             </svg>
@@ -115,9 +117,17 @@ if(empty($_SESSION["user"])) {
     $genres = $conn->query($sqlGenre);
 ?>
 
+<?php
+    $sqlPlaylist = "SELECT * FROM playlists";
+    $playlists = $conn->query($sqlPlaylist);
+?>
+
+
 <?php include "../modals/createModal.php";?>
+<?php include "../modals/selectPlaylistModal.php";?>
 
 <?php $genres->data_seek(0);?>
+
 <?php include "../modals/editModal.php";?>
 <?php include "../modals/deleteModal.php";?>
 
@@ -170,20 +180,54 @@ if(empty($_SESSION["user"])) {
         })
     })
 
+function obtenerPlaylistId() {
+    // Aquí, estoy asumiendo que tienes un elemento <select> con el ID 'playlist_id_select'
+    // y que deseas obtener el valor seleccionado.
+    var playlistSelect = document.getElementById("playlist_id_select");
+
+    // Verifica si se ha seleccionado una playlist
+    if (playlistSelect.selectedIndex !== -1) {
+        // Devuelve el valor de la playlist seleccionada
+        return playlistSelect.options[playlistSelect.selectedIndex].value;
+    } else {
+        // Maneja el caso en el que no se haya seleccionado ninguna playlist
+        // Puedes mostrar un mensaje de error, lanzar una excepción o tomar alguna otra acción apropiada.
+        console.error("No se ha seleccionado ninguna playlist.");
+        return null;
+    }
+}
 
 
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+let selectPlaylistModal = document.getElementById("selectPlaylistModal");
+let selectPlaylistBtn = document.querySelectorAll(".selectPlaylistBtn");
+let playlistSelect = document.getElementById("playlist_id_select");
 
-<!--
-<script>
+playlistSelect.addEventListener("change", () => {
+    let selectedSongId = selectPlaylistModal.querySelector("#id").value;
 
-    document.addEventListener("DOMContentLoaded", function(event) {
-    document.getElementById('defaultModalButton').click();
+    if (playlistSelect.selectedIndex !== -1) {
+        let selectedPlaylistId = playlistSelect.options[playlistSelect.selectedIndex].value;
+
+        selectPlaylistModal.querySelector("#id").value = selectedSongId;
+        selectPlaylistModal.querySelector("#playlist_id").value = selectedPlaylistId;
+    }
 });
 
+selectPlaylistBtn.forEach(btn => {
+    btn.addEventListener("click", event => {
+        let button = event.target;
+        let id = button.getAttribute('data-bs-id');
+
+        selectPlaylistModal.querySelector("#id").value = id;
+        
+        let changeEvent = new Event("change");
+        playlistSelect.dispatchEvent(changeEvent);
+    });
+});
+
+
+
 </script>
--->
 
 </body>
 </html>

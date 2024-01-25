@@ -14,7 +14,7 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="../controllers/createPlaylist.php" method="post" enctype="multipart/form-data">
         
                 <div class="grid gap-4 mb-4 sm:grid-cols-2">
                     <div>
